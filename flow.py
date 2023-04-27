@@ -6,7 +6,7 @@ from test import sum
 
 def load():
    print("Loading data")
-   sum(2,4)
+   print('Sum is: '+str(sum(2,4)))
 
 @flow(name="Hello-world")
 def my_flow():
