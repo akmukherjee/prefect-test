@@ -1,0 +1,3 @@
+[submodule "bento-common"]
+	path = bento-common
+	url = https://github.com/CBIIT/bento-common
