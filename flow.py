@@ -12,7 +12,7 @@ def load():
 @flow(name="Hello-world")
 def my_flow():
    #subprocess.call('git submodule update --init --recursive', timeout=60, shell=True)
-   subprocess.call('ls-l',shell=True)
+   subprocess.call('ls -l',shell=True)
    from bento.common.utils import APP_NAME
    load()
 
