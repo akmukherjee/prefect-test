@@ -2,7 +2,7 @@
 
 # Generic metadata about this project
 name: prefect-test
-prefect-version: 2.10.8
+prefect-version: 2.10.9
 
 # build section allows you to manage and build docker images
 build: null
