@@ -15,6 +15,5 @@ pull:
 - prefect.projects.steps.git_clone_project:
     repository: https://github.com/akmukherjee/prefect-test
     branch: main
-    access_token: null
     include_submodules: true
   
