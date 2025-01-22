@@ -1,0 +1,41 @@
+name: API Automation
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+  api_tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone Repo
+        uses: actions/checkout@v2
+
+      # Restore the Poetry cache before setting up the virtual environment test
+      - name: ⤴️ Restore poetry cache
+        uses: actions/cache@v3
+        with:
+          path: automation/venv
+          key: venv-3.10-${{ hashFiles('**/*.toml') }}
+          restore-keys: |
+            venv-3.10-
+
+      # Builds the virtual environment and downloads dependencies for automation
+      - name: Setup Automation
+        run: cd automation && python3 -m venv venv && source venv/bin/activate && ./setup.sh
+
+      # Checks to see if new dependencies were caught and make new cache for next run
+      - name: ⤵️ Establish new poetry cache
+        uses: actions/cache@v3
+        with:
+          path: automation/venv
+          key: venv-3.10-${{ hashFiles('**/*.toml') }}
+          restore-keys: |
+            venv-3.10-
+
+      - name: Execute API tests
+        env:
+          API_PASSWORD: ${{ secrets.API_PASSWORD }}
+          API_USERNAME: ${{ secrets.API_USERNAME }}
+          API_ENVIRONMENT: ${{ secrets.API_ENVIRONMENT }}
+        run: cd automation && source venv/bin/activate && python3 -m pytest api_tests/
